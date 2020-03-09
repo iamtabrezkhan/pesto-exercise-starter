@@ -1,44 +1,21 @@
-function buildFrequencyMap(string) {
-  const openBracesFrequencyMap = {};
-  const closedBracesFrequencyMap = {};
-  for (const char of string) {
-    if (char === "{" || char === "(" || char === "[") {
-      if (openBracesFrequencyMap[char]) {
-        openBracesFrequencyMap[char] += 1;
-      } else {
-        openBracesFrequencyMap[char] = 1;
-      }
-    } else if (char === "}" || char === ")" || char === "]") {
-      if (closedBracesFrequencyMap[char]) {
-        closedBracesFrequencyMap[char] += 1;
-      } else {
-        closedBracesFrequencyMap[char] = 1;
-      }
-    }
-  }
-  return {
-    openBracesFrequencyMap,
-    closedBracesFrequencyMap
-  };
-}
-
-function compareFrequencyMaps(
-  openBracesFrequencyMap,
-  closedBracesFrequencyMap
-) {
-  return (
-    openBracesFrequencyMap["{"] === closedBracesFrequencyMap["}"] &&
-    openBracesFrequencyMap["("] === closedBracesFrequencyMap[")"] &&
-    openBracesFrequencyMap["["] === closedBracesFrequencyMap["]"]
-  );
+function getEquivalentOpeningBrace(closingBrace) {
+  if (closingBrace === ")") return "(";
+  if (closingBrace === "}") return "{";
+  if (closingBrace === "]") return "[";
+  return false;
 }
 
 function balancedBraces(string) {
-  const {
-    openBracesFrequencyMap,
-    closedBracesFrequencyMap
-  } = buildFrequencyMap(string);
-  return compareFrequencyMaps(openBracesFrequencyMap, closedBracesFrequencyMap);
+  const stack = [];
+  for (const char of string) {
+    if (char === "(" || char === "{" || char === "[") {
+      stack.push(char);
+    } else if (stack[stack.length - 1] === getEquivalentOpeningBrace(char)) {
+      stack.pop();
+    }
+  }
+  if (!stack.length) return true;
+  return false;
 }
 
 export { balancedBraces };
