@@ -1,8 +1,6 @@
 function isPrime(number) {
   for (let j = 2; j <= Math.sqrt(number); j += 1) {
-    if (number % j === 0) {
-      return false;
-    }
+    if (number % j === 0) return false;
   }
   return true;
 }
