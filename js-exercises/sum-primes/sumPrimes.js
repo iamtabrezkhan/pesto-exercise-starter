@@ -1,25 +1,29 @@
-function isPrime(num) {
-  for (let j = 2; j <= Math.floor(Math.sqrt(num)); j += 1) {
-    if (num % j === 0) {
+function isPrime(number) {
+  for (let j = 2; j <= Math.sqrt(number); j += 1) {
+    if (number % j === 0) {
       return false;
     }
   }
   return true;
 }
 
-function sumPrimes(n) {
-  if (!Number.isNaN(n)) {
-    if (n > 1) {
-      let sum = 0;
-      for (let i = 2; i <= n; i += 1) {
-        if (isPrime(i)) {
-          sum += i;
-        }
-      }
-      return sum;
+function sumPrimes(number) {
+  if (Number.isNaN(number)) {
+    throw TypeError(`Expected number, received ${typeof number}`);
+  }
+  if (number <= 1) {
+    return 0;
+  }
+  if (number === 2) {
+    return 2;
+  }
+  let sum = 0;
+  for (let i = 3; i <= number; i += 2) {
+    if (isPrime(i)) {
+      sum += i;
     }
   }
-  return 0;
+  return sum + 2;
 }
 
 export { sumPrimes };
