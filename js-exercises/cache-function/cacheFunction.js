@@ -1,43 +1,25 @@
 function cacheFunction(fn) {
   const cacheStorage = {};
 
-  function addToCacheStorage(arg, result) {
-    if (typeof arg === "function") {
-      cacheStorage[arg.toString()] = result;
-    } else if (typeof arg === "object" || typeof Array.isArray(arg)) {
-      cacheStorage[JSON.stringify(arg)] = result;
-    } else {
-      cacheStorage["" + arg] = result;
-    }
+  function addToCacheStorage(args, result) {
+    cacheStorage[args] = result;
   }
 
-  function getResultFromCache(arg) {
-    if (typeof arg === "function") {
-      return cacheStorage[arg.toString()];
-    }
-    if (typeof arg === "object" || typeof Array.isArray(arg)) {
-      return cacheStorage[JSON.stringify(arg)];
-    }
-    return cacheStorage["" + arg];
+  function getResultFromCache(args) {
+    return cacheStorage[args];
   }
 
-  function isArgumentCached(arg) {
-    if (typeof arg === "function") {
-      return cacheStorage.hasOwnProperty(arg.toString());
-    }
-    if (typeof arg === "object" || typeof Array.isArray(arg)) {
-      return cacheStorage.hasOwnProperty(JSON.stringify(arg));
-    }
-    return cacheStorage.hasOwnProperty("" + arg);
+  function isArgumentCached(args) {
+    return cacheStorage.hasOwnProperty(args);
   }
 
-  return function(arg) {
+  return function(...args) {
     let result;
-    if (!isArgumentCached(arg)) {
-      result = fn(arg);
-      addToCacheStorage(arg, result);
+    if (!isArgumentCached(args)) {
+      result = fn(...args);
+      addToCacheStorage(args, result);
     } else {
-      result = getResultFromCache(arg);
+      result = getResultFromCache(args);
     }
     return result;
   };
