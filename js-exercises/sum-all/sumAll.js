@@ -1,18 +1,16 @@
-function sumAll(arr) {
-  let [x, y] = arr;
-  x = parseInt(x, 10);
-  y = parseInt(y, 10);
+function sumAll(range) {
+  const [lowerBound, upperBound] = range;
   let sum = 0;
-  if (x < y) {
-    for (let i = x; i <= y; i += 1) {
+  if (lowerBound < upperBound) {
+    for (let i = lowerBound; i <= upperBound; i += 1) {
       sum += i;
     }
-  } else if (x > y) {
-    for (let i = y; i <= x; i += 1) {
+  } else if (lowerBound > upperBound) {
+    for (let i = upperBound; i <= lowerBound; i += 1) {
       sum += i;
     }
   } else {
-    sum = x + y;
+    sum = lowerBound + upperBound;
   }
   return sum;
 }
