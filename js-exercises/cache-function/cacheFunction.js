@@ -14,13 +14,11 @@ function cacheFunction(fn) {
   }
 
   return function(...args) {
-    let result;
-    if (!isArgumentCached(args)) {
-      result = fn(...args);
-      addToCacheStorage(args, result);
-    } else {
-      result = getResultFromCache(args);
+    if (isArgumentCached(args)) {
+      return getResultFromCache(args);
     }
+    const result = fn(...args);
+    addToCacheStorage(args, result);
     return result;
   };
 }
