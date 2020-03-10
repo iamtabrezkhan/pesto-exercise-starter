@@ -5,14 +5,15 @@ function sumAll(range) {
     for (let i = lowerBound; i <= upperBound; i += 1) {
       sum += i;
     }
-  } else if (lowerBound > upperBound) {
+    return sum;
+  }
+  if (lowerBound > upperBound) {
     for (let i = upperBound; i <= lowerBound; i += 1) {
       sum += i;
     }
-  } else {
-    sum = lowerBound + upperBound;
+    return sum;
   }
-  return sum;
+  return lowerBound + upperBound;
 }
 
 export { sumAll };
