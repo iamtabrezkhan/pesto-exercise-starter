@@ -1,24 +1,23 @@
-function duplicateLetters(...args) {
-  const string = args[0];
-  if (string.length > 0) {
-    const countObject = {};
-    let max = 1;
-    for (const char of string) {
-      if (countObject[char]) {
-        countObject[char] += 1;
-      } else {
-        countObject[char] = 1;
-      }
-      if (countObject[char] > max) {
-        max = countObject[char];
-      }
-    }
-    if (max > 1) {
-      return max;
-    }
+function duplicateLetters(string) {
+  if (string.length < 1) {
     return false;
   }
-  return false;
+  const letterFrequencyMap = {};
+  let max = 1;
+  for (const letter of string) {
+    if (letterFrequencyMap[letter]) {
+      letterFrequencyMap[letter] += 1;
+    } else {
+      letterFrequencyMap[letter] = 1;
+    }
+    if (letterFrequencyMap[letter] > max) {
+      max = letterFrequencyMap[letter];
+    }
+  }
+  if (max <= 1) {
+    return false;
+  }
+  return max;
 }
 
 export { duplicateLetters };
