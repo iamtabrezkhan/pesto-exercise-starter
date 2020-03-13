@@ -22,4 +22,16 @@ describe("parseMs", () => {
     let result2 = parseMs(549457351);
     expect(result2.days).toEqual(6);
   });
+  test("should return correct object", () => {
+    const actualObject = {
+      days: 0,
+      hours: 20,
+      minutes: 26,
+      seconds: 38,
+      milliseconds: 462,
+      microseconds: 854,
+      nanoseconds: 370
+    };
+    expect(parseMs(73598462.85437)).toEqual(actualObject);
+  });
 });
