@@ -9,12 +9,7 @@ function updateObject(index, replaceWith, array) {
     throw new TypeError(`Expected array, received ${typeof array}`);
   }
   const clonedArray = array.slice();
-  const length = array.length;
-  if (index < 0) {
-    clonedArray.splice(length + index, 1, replaceWith);
-  } else {
-    clonedArray.splice(index, 1, replaceWith);
-  }
+  clonedArray.splice(index, 1, replaceWith);
   return clonedArray;
 }
 
