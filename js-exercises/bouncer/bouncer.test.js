@@ -13,4 +13,7 @@ describe("bouncer", () => {
     const result = bouncer([1, 2, 3, 4]);
     expect(result).toEqual([1, 2, 3, 4]);
   });
+  test("should throw an error if passed argument was not an array", () => {
+    expect(() => bouncer("")).toThrow();
+  });
 });
