@@ -1,7 +1,7 @@
-function aperture(n, array) {
-  if (typeof n !== "number") {
+function aperture(chunkSize, array) {
+  if (typeof chunkSize !== "number") {
     throw new TypeError(
-      `Expected 1st argument of type [number], received ${typeof n}`
+      `Expected 1st argument of type [number], received ${typeof chunkSize}`
     );
   }
   if (!Array.isArray(array)) {
@@ -9,15 +9,15 @@ function aperture(n, array) {
       `Expected 2nd argument of type [array], received ${typeof array}`
     );
   }
-  if (n > array.length) {
+  if (chunkSize > array.length) {
     return [];
   }
-  const result = [];
-  for (let i = 0; i <= array.length - n; i += 1) {
-    const subArray = array.slice(i, i + n);
-    result.push(subArray);
+  const arrayOfChunks = [];
+  for (let i = 0; i <= array.length - chunkSize; i += 1) {
+    const chunk = array.slice(i, i + chunkSize);
+    arrayOfChunks.push(chunk);
   }
-  return result;
+  return arrayOfChunks;
 }
 
 export { aperture };
