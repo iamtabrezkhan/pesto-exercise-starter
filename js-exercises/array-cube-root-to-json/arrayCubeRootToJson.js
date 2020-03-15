@@ -1,7 +1,3 @@
-function getCube(number) {
-  return number * number * number;
-}
-
 function isEveryElementInteger(array) {
   return array.every(elem => {
     if (elem === Infinity || elem === -Infinity) {
@@ -10,39 +6,6 @@ function isEveryElementInteger(array) {
     elem = parseInt(elem);
     return !Number.isNaN(elem);
   });
-}
-
-function getCubeRoot(number) {
-  if (number === Infinity) {
-    return Infinity;
-  }
-  if (number === -Infinity) {
-    return -Infinity;
-  }
-  if (number === 1) {
-    return 1;
-  }
-  if (number === -1) {
-    return -1;
-  }
-  if (number > 0) {
-    let i = 2;
-    let cube = getCube(i);
-    while (cube < number) {
-      i += 1;
-      cube = getCube(i);
-    }
-    return i;
-  }
-  if (number < 0) {
-    let i = -2;
-    let cube = getCube(i);
-    while (cube > number) {
-      i -= 1;
-      cube = getCube(i);
-    }
-    return i;
-  }
 }
 
 function arrayCubeRootToJson(array) {
@@ -54,10 +17,10 @@ function arrayCubeRootToJson(array) {
   }
   const resultantObject = {};
   for (const number of array) {
-    const cubeRoot = getCubeRoot(number);
+    const cubeRoot = Math.cbrt(number);
     resultantObject[number] = cubeRoot;
   }
   return resultantObject;
 }
 
-export { arrayCubeRootToJson, getCubeRoot, getCube };
+export { arrayCubeRootToJson };
