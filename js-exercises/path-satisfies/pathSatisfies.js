@@ -10,7 +10,8 @@ function pathSatisfies(predicate, path, object) {
   if (path.length === 0) {
     return false;
   }
-  const prop = path.shift();
+  const pathClone = path.slice(0);
+  const prop = pathClone.shift();
   if (typeof prop === "number") {
     const propValue = object[prop];
     if (
@@ -20,7 +21,7 @@ function pathSatisfies(predicate, path, object) {
       const didSatisfy = predicate(propValue);
       return didSatisfy;
     }
-    return pathSatisfies(predicate, path, propValue);
+    return pathSatisfies(predicate, pathClone, propValue);
   }
   if (typeof prop === "string") {
     const propValue = object[prop];
@@ -31,7 +32,7 @@ function pathSatisfies(predicate, path, object) {
       const didSatisfy = predicate(propValue);
       return didSatisfy;
     }
-    return pathSatisfies(predicate, path, propValue);
+    return pathSatisfies(predicate, pathClone, propValue);
   }
 }
 
