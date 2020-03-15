@@ -42,6 +42,16 @@ function shiftAlphabetBy(alphabet, shiftCount) {
 }
 
 function shiftAlphabetStringBy(string, shiftCount) {
+  if (typeof string !== "string") {
+    throw new TypeError(
+      `Expected 1st argument of type string, received ${typeof string}`
+    );
+  }
+  if (typeof shiftCount !== "number") {
+    throw new TypeError(
+      `Expected 2nd argument of type number, received ${typeof string}`
+    );
+  }
   let shiftedString = "";
   for (const letter of string) {
     shiftedString += shiftAlphabetBy(letter, shiftCount);
@@ -50,6 +60,9 @@ function shiftAlphabetStringBy(string, shiftCount) {
 }
 
 function alphabeticShift(string) {
+  if (typeof string !== "string") {
+    throw new TypeError(`Expected string, received ${typeof string}`);
+  }
   return shiftAlphabetStringBy(string, 1);
 }
 
