@@ -2,11 +2,11 @@ const allPromises = promises => {
   const results = [];
   let completedPromises = 0;
   return new Promise((resolve, reject) => {
-    for (let i = 0; i < promises.length; i += 1) {
-      if (promises[i] instanceof Promise) {
-        promises[i]
+    promises.forEach((promise, index) => {
+      if (promise instanceof Promise) {
+        promise
           .then(value => {
-            results[i] = value;
+            results[index] = value;
             completedPromises += 1;
             if (completedPromises === promises.length) {
               resolve(results);
@@ -16,13 +16,13 @@ const allPromises = promises => {
             reject(error);
           });
       } else {
-        results[i] = promises[i];
+        results[index] = promise;
         completedPromises += 1;
         if (completedPromises === promises.length) {
           resolve(results);
         }
       }
-    }
+    });
   });
 };
 
