@@ -41,6 +41,8 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
+js-exercises/
+react-exercises/grocery-list-react/node_modules/
 
 # TypeScript v1 declaration files
 typings/
