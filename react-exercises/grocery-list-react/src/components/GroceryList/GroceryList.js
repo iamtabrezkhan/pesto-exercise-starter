@@ -11,7 +11,7 @@ export class GroceryList extends Component {
     this.addItem = this.addItem.bind(this);
     this.clearAll = this.clearAll.bind(this);
     this.ifItemAlreadyExists = this.ifItemAlreadyExists.bind(this);
-    this.markItRed = this.markItRed.bind(this);
+    this.markAsPurchased = this.markAsPurchased.bind(this);
     this.scrollItemsContainerToBottom = this.scrollItemsContainerToBottom.bind(
       this
     );
@@ -30,7 +30,11 @@ export class GroceryList extends Component {
           className={Classes.itemsContainer}
         >
           {this.state.items.map(item => (
-            <GroceryItem markItRed={this.markItRed} item={item} key={item.id} />
+            <GroceryItem
+              markAsPurchased={this.markAsPurchased}
+              item={item}
+              key={item.id}
+            />
           ))}
         </div>
         <div className={Classes.inputContainer}>
@@ -97,7 +101,7 @@ export class GroceryList extends Component {
     }));
   }
 
-  markItRed(itemId) {
+  markAsPurchased(itemId) {
     this.setState(prevState => ({
       items: prevState.items.map(item => {
         return item.id === itemId

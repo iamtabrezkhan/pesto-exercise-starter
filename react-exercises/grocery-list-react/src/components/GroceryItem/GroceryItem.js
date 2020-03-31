@@ -6,7 +6,7 @@ export class GroceryItem extends Component {
     const { text, count } = this.props.item;
     return (
       <div
-        onClick={() => this.props.markItRed(this.props.item.id)}
+        onClick={() => this.props.markAsPurchased(this.props.item.id)}
         className={`${Classes.main} ${
           this.props.item.purchased ? Classes.purchased : ""
         }`}
