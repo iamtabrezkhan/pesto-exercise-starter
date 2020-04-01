@@ -17,10 +17,6 @@ export class GroceryList extends Component {
     );
   }
 
-  componentDidUpdate() {
-    // this.scrollItemsContainerToBottom();
-  }
-
   render() {
     return (
       <div className={Classes.main}>
