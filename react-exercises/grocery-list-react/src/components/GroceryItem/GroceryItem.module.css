@@ -1,0 +1,33 @@
+.main {
+  width: 100%;
+  font-size: 0.9rem;
+  color: var(--color-light);
+  padding: 3px 0;
+  cursor: pointer;
+  margin: 5px 0;
+}
+
+.main:hover {
+  background: #eee;
+}
+
+.purchased {
+  color: red !important;
+  text-decoration: line-through;
+}
+
+.main > .wrapper {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.main > .wrapper .text {
+  width: 92%;
+}
+.main > .wrapper .count {
+  width: 8%;
+  text-align: right;
+  word-break: break-all;
+}
