@@ -1,0 +1,38 @@
+.main {
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid var(--color-green);
+  position: relative;
+  overflow: hidden;
+}
+
+.topBar {
+  width: 100%;
+  letter-spacing: 1px;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px 0;
+  font-size: 1.5rem;
+  align-items: center;
+  color: var(--color-green);
+}
+
+.topBar .actionBtn {
+  margin-left: auto;
+}
+
+.topBar button {
+  font-family: "VT323", monospace;
+  font-size: 1.2rem;
+  padding: 8px 32px;
+  background: var(--color-green);
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.5);
+}
+
+.topBar button:active {
+  transform: translateY(3px);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}

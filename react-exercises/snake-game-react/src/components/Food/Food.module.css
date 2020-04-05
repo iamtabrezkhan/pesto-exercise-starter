@@ -1,0 +1,8 @@
+.main {
+  position: absolute;
+}
+
+.main img {
+  width: 100%;
+  display: block;
+}
