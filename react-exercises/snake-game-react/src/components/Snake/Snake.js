@@ -15,6 +15,35 @@ const directions = {
   DOWN: "DOWN",
 };
 
+const useAnimation = (cb, fps, isPlaying, isPaused) => {
+  const cbRef = useRef();
+  const animationFrameId = useRef();
+  const then = useRef(window.performance.now());
+  const now = useRef();
+  const elapsed = useRef();
+  const fpsInterval = useRef(1000 / fps);
+  useEffect(() => {
+    cbRef.current = cb;
+  }, [cb]);
+  useEffect(() => {
+    function loop() {
+      animationFrameId.current = window.requestAnimationFrame(loop);
+      now.current = window.performance.now();
+      elapsed.current = now.current - then.current;
+      if (elapsed.current > fpsInterval.current) {
+        then.current = now.current - (elapsed.current % fpsInterval.current);
+        cbRef.current();
+      }
+    }
+    if (isPlaying && !isPaused) {
+      animationFrameId.current = window.requestAnimationFrame(loop);
+      return () => {
+        window.cancelAnimationFrame(animationFrameId.current);
+      };
+    }
+  }, [isPlaying, isPaused]);
+};
+
 export default function Snake({
   cell,
   numberOfCells,
@@ -162,34 +191,6 @@ export default function Snake({
   };
   const isFood = (x, y) => {
     return x === food.x && y === food.y;
-  };
-  const useAnimation = (cb, fps, isPlaying, isPaused) => {
-    const cbRef = useRef();
-    const animationFrameId = useRef();
-    const then = useRef(window.performance.now());
-    const now = useRef();
-    const elapsed = useRef();
-    const fpsInterval = useRef(1000 / fps);
-    useEffect(() => {
-      cbRef.current = cb;
-    }, [cb]);
-    useEffect(() => {
-      function loop() {
-        animationFrameId.current = window.requestAnimationFrame(loop);
-        now.current = window.performance.now();
-        elapsed.current = now.current - then.current;
-        if (elapsed.current > fpsInterval.current) {
-          then.current = now.current - (elapsed.current % fpsInterval.current);
-          cbRef.current();
-        }
-      }
-      if (isPlaying && !isPaused) {
-        animationFrameId.current = window.requestAnimationFrame(loop);
-        return () => {
-          window.cancelAnimationFrame(animationFrameId.current);
-        };
-      }
-    }, [isPlaying, isPaused]);
   };
   useAnimation(
     () => {

@@ -3,6 +3,7 @@ import Classes from "./Playground.module.css";
 import Food from "../Food/Food";
 import { generateRandomFoodPosition } from "../../utils/helper";
 import Snake from "../Snake/Snake";
+import BrawlButton from "../BrawlButton/BrawlButton";
 import GameOverOverlay from "../GameOverOverlay/GameOverOverlay";
 import EatMp3 from "../../assets/eat.mp3";
 import GameOverMp3 from "../../assets/gameover.mp3";
@@ -112,24 +113,16 @@ export default function Playground({ config, children }) {
         <div className={Classes.score}>Score: {score}</div>
         <div className={Classes.actionBtn}>
           {!isPlaying && !isGameOver ? (
-            <button className={Classes.startBtn} onClick={startGame}>
-              Start
-            </button>
+            <BrawlButton onClick={startGame} text="Start" />
           ) : null}
           {isGameOver && !isPlaying ? (
-            <button className={Classes.restartBtn} onClick={restartGame}>
-              Restart
-            </button>
+            <BrawlButton onClick={restartGame} text="Restart" />
           ) : null}
           {!isPaused && isPlaying ? (
-            <button className={Classes.pauseBtn} onClick={pauseGame}>
-              Pause
-            </button>
+            <BrawlButton onClick={pauseGame} text="Pause" />
           ) : null}
           {isPaused && isPlaying ? (
-            <button className={Classes.resumeBtn} onClick={resumeGame}>
-              Resume
-            </button>
+            <BrawlButton onClick={resumeGame} text="Resume" />
           ) : null}
         </div>
       </div>
