@@ -112,16 +112,24 @@ export default function Playground({ config, children }) {
         <div className={Classes.score}>Score: {score}</div>
         <div className={Classes.actionBtn}>
           {!isPlaying && !isGameOver ? (
-            <button onClick={startGame}>Start</button>
+            <button className={Classes.startBtn} onClick={startGame}>
+              Start
+            </button>
           ) : null}
           {isGameOver && !isPlaying ? (
-            <button onClick={restartGame}>Restart</button>
+            <button className={Classes.restartBtn} onClick={restartGame}>
+              Restart
+            </button>
           ) : null}
           {!isPaused && isPlaying ? (
-            <button onClick={pauseGame}>Pause</button>
+            <button className={Classes.pauseBtn} onClick={pauseGame}>
+              Pause
+            </button>
           ) : null}
           {isPaused && isPlaying ? (
-            <button onClick={resumeGame}>Resume</button>
+            <button className={Classes.resumeBtn} onClick={resumeGame}>
+              Resume
+            </button>
           ) : null}
         </div>
       </div>
