@@ -18,8 +18,8 @@ code {
   --color-green: #249b46;
   --color-green-2: #5e9b24;
   --color-head: #9b2824;
-  --color-gray-1: #f1f1f1;
-  --color-gray-2: #e9e9e9;
+  --color-gray-1: rgba(241, 241, 241, 0.5);
+  --color-gray-2: rgba(233, 233, 233, 0.5);
   --color-gray-3: #eeeeee;
   --color-gray-4: #dadada;
   --color-gray-8: #6b6b6b;

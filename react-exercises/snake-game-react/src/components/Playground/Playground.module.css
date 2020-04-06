@@ -4,17 +4,15 @@
   border: 1px solid var(--color-green);
   position: relative;
   overflow: hidden;
+  background: linear-gradient(90deg, #51eb4c, #a5f1ab, #4ceb66);
 }
 
 .topBar {
   width: 100%;
-  letter-spacing: 1px;
   display: flex;
   flex-wrap: wrap;
   padding: 10px 0;
-  font-size: 1.5rem;
   align-items: center;
-  color: var(--color-green);
 }
 
 .topBar .actionBtn {

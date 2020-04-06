@@ -6,7 +6,7 @@
   color: white;
   text-transform: uppercase;
   letter-spacing: 2px;
-  box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.5);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
   position: relative;
   /* border-top-left-radius: 3px;
   border-top-right-radius: 3px; */
@@ -20,12 +20,11 @@
   overflow: hidden;
 }
 
-.brawlButton::after {
+.brawlButton::after,
+.brawlButton:before {
   content: "";
   width: 100%;
   height: 10%;
-  top: 0;
-  background: #53d62b;
   position: absolute;
   z-index: -1;
   border-top-left-radius: 3px;
@@ -33,18 +32,16 @@
 }
 
 .brawlButton::before {
-  content: "";
-  width: 100%;
-  height: 10%;
   bottom: 0;
   background: #349218;
-  position: absolute;
-  z-index: -1;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
+}
+
+.brawlButton::after {
+  top: 0;
+  background: #53d62b;
 }
 
 .brawlButton:active {
   transform: translateY(2px) skewX(-3deg);
-  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
 }

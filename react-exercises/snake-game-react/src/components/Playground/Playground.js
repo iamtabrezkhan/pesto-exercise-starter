@@ -4,6 +4,7 @@ import Food from "../Food/Food";
 import { generateRandomFoodPosition } from "../../utils/helper";
 import Snake from "../Snake/Snake";
 import BrawlButton from "../BrawlButton/BrawlButton";
+import ScoreBoard from "../ScoreBoard/ScoreBoard";
 import GameOverOverlay from "../GameOverOverlay/GameOverOverlay";
 import EatMp3 from "../../assets/eat.mp3";
 import GameOverMp3 from "../../assets/gameover.mp3";
@@ -110,7 +111,9 @@ export default function Playground({ config, children }) {
   return (
     <>
       <div className={`${Classes.topBar} font-vt323`}>
-        <div className={Classes.score}>Score: {score}</div>
+        <div className={Classes.score}>
+          <ScoreBoard score={score} />
+        </div>
         <div className={Classes.actionBtn}>
           {!isPlaying && !isGameOver ? (
             <BrawlButton onClick={startGame} text="Start" />
