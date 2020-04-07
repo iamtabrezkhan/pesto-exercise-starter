@@ -18,3 +18,7 @@
 .topBar .actionBtn {
   margin-left: auto;
 }
+
+.topBar .sound {
+  padding-left: 5px;
+}

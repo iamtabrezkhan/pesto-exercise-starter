@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Classes from "./Playground.module.css";
 import Food from "../Food/Food";
 import { generateRandomFoodPosition } from "../../utils/helper";
@@ -12,6 +12,11 @@ import GameOverMp3 from "../../assets/gameover.mp3";
 const eatAudio = new Audio(EatMp3);
 const gameOverAudio = new Audio(GameOverMp3);
 
+const keyCodes = {
+  SPACE: 32,
+  M: 77,
+};
+
 export default function Playground({ config, children }) {
   // ========== state =======================================
   const [gameConfig, setGameConfig] = useState({
@@ -20,6 +25,7 @@ export default function Playground({ config, children }) {
     isGameOver: false,
     restartGame: false,
     isPaused: false,
+    isSound: false,
   });
   const { cell, numberOfCells, isPlaying, isGameOver, isPaused } = gameConfig;
   const [food, setFood] = useState(
@@ -31,6 +37,7 @@ export default function Playground({ config, children }) {
     )
   );
   const [score, setScore] = useState(0);
+  const [sound, setSound] = useState(false);
   // ========================================================
   // ========================================================
   const startGame = () => {
@@ -42,7 +49,7 @@ export default function Playground({ config, children }) {
       };
     });
   };
-  const gameOver = () => {
+  const setGameOver = () => {
     setGameConfig((prevState) => {
       return {
         ...prevState,
@@ -51,13 +58,15 @@ export default function Playground({ config, children }) {
         restartGame: false,
       };
     });
-    gameOverAudio.play();
+    if (sound) {
+      gameOverAudio.play();
+    }
   };
   const onBoundaryCollision = () => {
-    gameOver();
+    setGameOver();
   };
   const onSelfCollision = () => {
-    gameOver();
+    setGameOver();
   };
   const onEatFood = () => {
     setFood(
@@ -71,7 +80,9 @@ export default function Playground({ config, children }) {
     setScore((prevState) => {
       return prevState + 5;
     });
-    eatAudio.play();
+    if (sound) {
+      eatAudio.play();
+    }
   };
   const restartGame = () => {
     setGameConfig((prevState) => {
@@ -108,11 +119,59 @@ export default function Playground({ config, children }) {
       };
     });
   };
+  const toggleSound = () => {
+    setSound((prevState) => {
+      return !prevState;
+    });
+  };
+  const SoundElement = !sound ? (
+    <i className="fas fa-volume-mute"></i>
+  ) : (
+    <i className="fas fa-volume-up"></i>
+  );
+  const gamePaused = () => {
+    return isPaused && isPlaying;
+  };
+  const gamePlaying = () => {
+    return !isPaused && isPlaying;
+  };
+  const handleKeyPress = (e) => {
+    const keyCode = e.keyCode || e.which;
+    if (keyCode === keyCodes.SPACE) {
+      e.preventDefault();
+      if (gamePlaying()) {
+        console.log("pause");
+        pauseGame();
+      } else if (gamePaused()) {
+        console.log("resume");
+        resumeGame();
+      } else {
+        console.log("restart");
+        restartGame();
+      }
+      return;
+    }
+    if (keyCode === keyCodes.M) {
+      e.preventDefault();
+      toggleSound();
+      return;
+    }
+  };
+  useEffect(() => {
+    document.addEventListener("keyup", handleKeyPress);
+    return () => {
+      console.log("unmount");
+      document.removeEventListener("keyup", handleKeyPress);
+    };
+  }, [isPlaying, isPaused]);
   return (
     <>
       <div className={`${Classes.topBar} font-vt323`}>
         <div className={Classes.score}>
-          <ScoreBoard score={score} />
+          <ScoreBoard title="Score" value={score} />
+        </div>
+        <div className={Classes.sound}>
+          <BrawlButton onClick={toggleSound} text={SoundElement} />
         </div>
         <div className={Classes.actionBtn}>
           {!isPlaying && !isGameOver ? (
