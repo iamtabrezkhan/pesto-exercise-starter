@@ -6,14 +6,16 @@ afterEach(cleanup);
 
 describe("<BrawlButton />", () => {
   test("if the text inside button is correct", () => {
-    const { getByTestId } = render(<BrawlButton text="Click Me" />);
+    const { getByTestId } = render(
+      <BrawlButton text="Click Me" testId="brawlButton" />
+    );
     const button = getByTestId("brawlButton");
     expect(button.textContent).toBe("Click Me");
   });
   test("if the passed onClick function is invoked", () => {
     const onClick = jest.fn();
     const { getByTestId } = render(
-      <BrawlButton text="Click Me" onClick={onClick} />
+      <BrawlButton text="Click Me" onClick={onClick} testId="brawlButton" />
     );
     const button = getByTestId("brawlButton");
     fireEvent.click(button, { bubble: true });
