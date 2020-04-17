@@ -4,7 +4,7 @@ import Playground from "./components/Playground/Playground";
 
 function App() {
   return (
-    <div className="App">
+    <div data-testid="App" className="App">
       <div className="wrapper">
         <Playground
           config={{

@@ -129,6 +129,7 @@ export default function Playground({ config, children }) {
   ) : (
     <i className="fas fa-volume-up"></i>
   );
+  const InfoIconElement = <i className="far fa-question-circle"></i>;
   const gamePaused = () => {
     return isPaused && isPlaying;
   };
@@ -140,13 +141,10 @@ export default function Playground({ config, children }) {
     if (keyCode === keyCodes.SPACE) {
       e.preventDefault();
       if (gamePlaying()) {
-        console.log("pause");
         pauseGame();
       } else if (gamePaused()) {
-        console.log("resume");
         resumeGame();
       } else {
-        console.log("restart");
         restartGame();
       }
       return;
@@ -160,13 +158,15 @@ export default function Playground({ config, children }) {
   useEffect(() => {
     document.addEventListener("keyup", handleKeyPress);
     return () => {
-      console.log("unmount");
       document.removeEventListener("keyup", handleKeyPress);
     };
   }, [isPlaying, isPaused]);
   return (
     <>
       <div className={`${Classes.topBar} font-vt323`}>
+        <div className={Classes.info}>
+          <ScoreBoard title={InfoIconElement} />
+        </div>
         <div className={Classes.score}>
           <ScoreBoard title="Score" value={score} />
         </div>
@@ -194,6 +194,7 @@ export default function Playground({ config, children }) {
           width: cell.width * numberOfCells.x,
           height: cell.height * numberOfCells.y,
         }}
+        data-testid="playground"
       >
         {/* gameover overlay */}
         {isGameOver ? <GameOverOverlay /> : null}

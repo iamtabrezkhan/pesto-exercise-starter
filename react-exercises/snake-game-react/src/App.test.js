@@ -1,9 +1,14 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import App from './App';
+import React from "react";
+import { render, cleanup } from "@testing-library/react";
+import App from "./App";
+import Playground from "./components/Playground/Playground";
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+afterEach(cleanup);
+
+describe("<App />", () => {
+  test("renders the app to the document", () => {
+    const { getByTestId } = render(<App />);
+    const app = getByTestId("App");
+    expect(app).toBeInTheDocument();
+  });
 });

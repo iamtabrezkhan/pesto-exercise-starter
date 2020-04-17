@@ -131,7 +131,6 @@ export default function Snake({
   const changeDirection = (e) => {
     const keyCode = e.keyCode || e.which;
     if (keyCode === keyCodes.LEFT) {
-      e.preventDefault();
       setDirection((prevState) => {
         if (prevState === directions.RIGHT) {
           return prevState;
@@ -141,7 +140,6 @@ export default function Snake({
       return;
     }
     if (keyCode === keyCodes.RIGHT) {
-      e.preventDefault();
       setDirection((prevState) => {
         if (prevState === directions.LEFT) {
           return prevState;
@@ -151,7 +149,6 @@ export default function Snake({
       return;
     }
     if (keyCode === keyCodes.UP) {
-      e.preventDefault();
       setDirection((prevState) => {
         if (prevState === directions.DOWN) {
           return prevState;
@@ -161,7 +158,6 @@ export default function Snake({
       return;
     }
     if (keyCode === keyCodes.DOWN) {
-      e.preventDefault();
       setDirection((prevState) => {
         if (prevState === directions.UP) {
           return prevState;
@@ -215,9 +211,9 @@ export default function Snake({
     isPaused
   );
   useEffect(() => {
-    document.addEventListener("keyup", changeDirection);
+    document.addEventListener("keydown", changeDirection);
     return () => {
-      document.removeEventListener("keyup", changeDirection);
+      document.removeEventListener("keydown", changeDirection);
     };
   }, []);
   useEffect(() => {
