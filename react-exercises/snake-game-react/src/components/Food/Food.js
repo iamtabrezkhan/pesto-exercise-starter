@@ -7,7 +7,7 @@ import Food4 from "../../assets/food-4.png";
 
 const foods = [Food1, Food2, Food3, Food4];
 
-export default function Food({ x, y, width, height, foodId }) {
+export default function Food({ x, y, width, height, foodId, testId }) {
   return (
     <div
       className={Classes.main}
@@ -17,6 +17,7 @@ export default function Food({ x, y, width, height, foodId }) {
         width: width,
         height: height,
       }}
+      data-testid={testId}
     >
       <img src={foods[foodId]} alt="Food" />
     </div>

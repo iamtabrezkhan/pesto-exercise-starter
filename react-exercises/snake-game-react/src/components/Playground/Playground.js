@@ -8,6 +8,7 @@ import ScoreBoard from "../ScoreBoard/ScoreBoard";
 import GameOverOverlay from "../GameOverOverlay/GameOverOverlay";
 import EatMp3 from "../../assets/eat.mp3";
 import GameOverMp3 from "../../assets/gameover.mp3";
+import Instructions from "../Instructions/Instructions";
 
 const eatAudio = new Audio(EatMp3);
 const gameOverAudio = new Audio(GameOverMp3);
@@ -15,6 +16,7 @@ const gameOverAudio = new Audio(GameOverMp3);
 const keyCodes = {
   SPACE: 32,
   M: 77,
+  I: 73,
 };
 
 export default function Playground({ config, children }) {
@@ -38,6 +40,7 @@ export default function Playground({ config, children }) {
   );
   const [score, setScore] = useState(0);
   const [sound, setSound] = useState(false);
+  const [showInstructions, setShowInstructions] = useState(true);
   // ========================================================
   // ========================================================
   const startGame = () => {
@@ -154,6 +157,11 @@ export default function Playground({ config, children }) {
       toggleSound();
       return;
     }
+    if (keyCode === keyCodes.I) {
+      e.preventDefault();
+      setShowInstructions((prevState) => !prevState);
+      return;
+    }
   };
   useEffect(() => {
     document.addEventListener("keyup", handleKeyPress);
@@ -163,8 +171,13 @@ export default function Playground({ config, children }) {
   }, [isPlaying, isPaused]);
   return (
     <>
+      {showInstructions && <Instructions />}
       <div className={`${Classes.topBar} font-vt323`}>
-        <div className={Classes.info}>
+        <div
+          className={Classes.info}
+          onClick={() => setShowInstructions((prevState) => !prevState)}
+          title={showInstructions ? "Hide instructions" : "Show instructions"}
+        >
           <ScoreBoard title={InfoIconElement} />
         </div>
         <div className={Classes.score}>
