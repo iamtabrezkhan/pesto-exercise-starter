@@ -1,0 +1,49 @@
+.main .wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  color: white;
+  transform: skewX(-3deg);
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.main .wrapper .title,
+.main .wrapper .value {
+  position: relative;
+  z-index: 2;
+  padding: 8px 8px;
+}
+
+.main .wrapper .title::after,
+.main .wrapper .title::before,
+.main .wrapper .value::after,
+.main .wrapper .value::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  left: 0;
+  z-index: -1;
+}
+
+.main .wrapper .title::after {
+  background: #752d0c;
+  top: 0;
+}
+
+.main .wrapper .title::before {
+  background: #af491a;
+  bottom: 0;
+}
+
+.main .wrapper .value::after {
+  background: #75620c;
+  top: 0;
+}
+
+.main .wrapper .value::before {
+  background: #afa51a;
+  bottom: 0;
+}

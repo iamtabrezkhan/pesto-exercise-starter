@@ -1,0 +1,20 @@
+.main {
+  margin-bottom: 10px;
+  padding: 10px 12px;
+  background: var(--color-gold);
+  border: 2px solid var(--color-brown);
+  color: white;
+  font-size: 1.1rem;
+}
+
+.main .title {
+  text-align: center;
+  color: var(--color-brown);
+  text-decoration: underline;
+  font-size: 1rem;
+}
+
+.main .info {
+  padding-top: 10px;
+  text-align: center;
+}
